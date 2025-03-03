@@ -4,7 +4,7 @@ from sqlalchemy import Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 
-class Product(Base):
+class Task(Base):
     __tablename__ = "tasks"
 
 
