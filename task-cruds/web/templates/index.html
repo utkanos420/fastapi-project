@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заданий</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <nav>
+            <ul>
+                <li>Главная</li>
+                <li>Статистика</li>
+                <li>Профиль</li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <div class="task-container"></div>
+        <button id="add-task">Добавить задание</button>
+    </div>
+    <div id="task-modal" class="modal hidden">
+        <div class="modal-content">
+            <input type="text" id="task-title" placeholder="Название задания (макс. 15 символов)" maxlength="15">
+            <textarea id="task-desc" placeholder="Описание задания (макс. 500 символов)" maxlength="500"></textarea>
+            <input type="date" id="task-date">
+            <input type="color" id="task-color">
+            <button id="save-task">Сохранить</button>
+        </div>
+    </div>
+    <div id="task-detail-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="detail-title"></h3>
+            <p id="detail-desc"></p>
+            <p><strong>Срок сдачи:</strong> <span id="detail-date"></span></p>
+            <button id="delete-task">Удалить</button>
+            <button id="close-detail">Закрыть</button>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
