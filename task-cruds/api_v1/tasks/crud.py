@@ -30,6 +30,6 @@ async def update_task(session: AsyncSession, task: Task, task_update: TaskUpdate
     await session.commit()
     return task
 
-async def delete_product(session: AsyncSession, task_in: Task) -> None:
+async def delete_task(session: AsyncSession, task_in: Task) -> None:
     await session.delete(task_in)
     await session.commit()

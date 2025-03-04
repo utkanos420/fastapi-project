@@ -14,7 +14,7 @@ async def task_by_id(
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 
 ) -> Task:
-    task = await crud.get_product(session=session, task_id=task_id)
+    task = await crud.get_task(session=session, task_id=task_id)
     if task is not None:
         return task
     
