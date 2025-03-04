@@ -21,7 +21,7 @@ async def create_task(task_in: TaskCreate,
     return await crud.create_task(session=session, task_in=task_in)
 
 
-@crud_router.patch("/{task_id}/", tags=["tasks"])
+@crud_router.get("/{task_id}/", tags=["tasks"])
 async def get_task(
     task: Task = Depends(task_by_id),
 

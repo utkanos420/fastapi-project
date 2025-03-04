@@ -26,13 +26,19 @@ async def create_task(session: AsyncSession, task_in: TaskCreate) -> Task:
 async def update_task(
     session: AsyncSession,
     task: Task,
-    task_update: TaskUpdate | TaskUpdatePartial,
+    task_update: TaskUpdatePartial,
     partial: bool = True,
 ) -> Task:
     for name, value in task_update.model_dump(exclude_unset=partial).items():
         setattr(task, name, value)
+
+    print(f"Updating task {task.id} with {task_update}")
+    session.add(task)  # Добавляем объект в сессию
     await session.commit()
+    await session.refresh(task)  # Обновляем объект из БД, чтобы получить актуальные данные
+
     return task
+
 
 async def delete_task(session: AsyncSession, task_in: Task) -> None:
     await session.delete(task_in)

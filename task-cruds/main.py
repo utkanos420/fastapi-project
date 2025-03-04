@@ -28,5 +28,5 @@ def hello_index():
     }
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, port=1447)
+    uvicorn.run(app=app, port=1447, log_level="debug")
 
