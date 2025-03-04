@@ -23,10 +23,14 @@ async def create_task(session: AsyncSession, task_in: TaskCreate) -> Task:
     # await session.refresh(task)
     return task
 
-async def update_task(session: AsyncSession, task: Task, task_update: TaskUpdate | TaskUpdatePartial, partial: bool = False, ) -> TaskUpdate:
-    for name, value in task_update.model_dump(exclude_none=partial).items():
+async def update_task(
+    session: AsyncSession,
+    task: Task,
+    task_update: TaskUpdate | TaskUpdatePartial,
+    partial: bool = True,
+) -> Task:
+    for name, value in task_update.model_dump(exclude_unset=partial).items():
         setattr(task, name, value)
-
     await session.commit()
     return task
 
