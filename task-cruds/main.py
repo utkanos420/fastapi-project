@@ -55,5 +55,5 @@ async def get_tasks(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, port=1447, log_level="debug")
+    uvicorn.run(app=app, port=3333, log_level="debug")
 

@@ -20,6 +20,8 @@
         <div class="task-container"></div>
         <button id="add-task">Добавить задание</button>
     </div>
+
+    <!-- Модальное окно для добавления задания -->
     <div id="task-modal" class="modal hidden">
         <div class="modal-content">
             <input type="text" id="task-title" placeholder="Название задания (макс. 15 символов)" maxlength="15">
@@ -29,6 +31,8 @@
             <button id="save-task">Сохранить</button>
         </div>
     </div>
+
+    <!-- Модальное окно для детального просмотра задания -->
     <div id="task-detail-modal" class="modal hidden">
         <div class="modal-content">
             <h3 id="detail-title"></h3>
@@ -38,6 +42,7 @@
             <button id="close-detail">Закрыть</button>
         </div>
     </div>
+
     <script src="/static/script.js"></script>
 </body>
 </html>

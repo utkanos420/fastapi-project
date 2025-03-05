@@ -5,34 +5,61 @@ document.getElementById('add-task').addEventListener('click', function() {
 document.getElementById('save-task').addEventListener('click', function() {
     const title = document.getElementById('task-title').value;
     const desc = document.getElementById('task-desc').value;
-    const date = document.getElementById('task-date').value;
-    const color = document.getElementById('task-color').value;
-    const taskContainer = document.querySelector('.task-container');
+    const color = document.getElementById('task-color').value; // Цвет задачи
     
-    if (title.trim() !== "" && date !== "") {
-        const task = document.createElement('div');
-        task.innerHTML = `<strong>${title}</strong><br>${date}`;
-        task.style.backgroundColor = color;
-        task.classList.add('task');
-        task.dataset.desc = desc;
-        task.dataset.date = date;
-        task.dataset.title = title;
+    // Дата создания задачи будет установлена как текущая дата
+    const createdDate = new Date().toISOString(); // Преобразуем в формат ISO
+    const createdUntilDate = ""; // Пусть пока будет пустое значение (это поле можно использовать по желанию)
+
+    // Формируем объект с задачей
+    const taskData = {
+        task_title: title,
+        task_description: desc,
+        task_importance: 0,  // Можно изменить, если нужно
+        task_created_date: createdDate,
+        task_created_until_date: createdUntilDate,
+        is_archived: 1,  // Архивировано по умолчанию
+    };
+
+    // Отправляем данные на сервер
+    fetch('/api/v1/tasks/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(taskData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Задача успешно добавлена:', data);
         
-        task.addEventListener('click', function() {
-            document.getElementById('detail-title').textContent = task.dataset.title;
-            document.getElementById('detail-desc').textContent = task.dataset.desc;
-            document.getElementById('detail-date').textContent = task.dataset.date;
+        // Создаем элемент задачи на странице
+        const taskContainer = document.querySelector('.task-container');
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('task');
+        taskElement.style.backgroundColor = color;  // Цвет задачи
+
+        taskElement.innerHTML = `
+            <strong>${title}</strong><br>
+            ${createdDate}<br>
+            ${desc}<br>
+            Важность: 0<br>
+            Архивирован: ${taskData.is_archived === 1 ? 'Да' : 'Нет'}
+        `;
+
+        taskElement.addEventListener('click', function () {
+            document.getElementById('detail-title').textContent = title;
+            document.getElementById('detail-desc').textContent = desc;
+            document.getElementById('detail-date').textContent = createdUntilDate;
             document.getElementById('task-detail-modal').classList.remove('hidden');
-            
-            document.getElementById('delete-task').onclick = function() {
-                task.remove();
-                document.getElementById('task-detail-modal').classList.add('hidden');
-            };
         });
-        
-        taskContainer.appendChild(task);
-    }
-    
+
+        taskContainer.appendChild(taskElement);
+    })
+    .catch(error => {
+        console.error('Ошибка при добавлении задачи:', error);
+    });
+
     document.getElementById('task-modal').classList.add('hidden');
 });
 
@@ -40,30 +67,25 @@ document.getElementById('close-detail').addEventListener('click', function() {
     document.getElementById('task-detail-modal').classList.add('hidden');
 });
 
-// Новый код для работы с API
+// Логика для получения всех задач
 document.addEventListener('DOMContentLoaded', function () {
-    // GET-запрос для получения всех заданий с сервера
-    fetch('http://127.0.0.1:1447/api/v1/tasks/')
-        .then(response => response.json())  // Преобразуем ответ в JSON
+    fetch('/api/v1/tasks')
+        .then(response => response.json())
         .then(data => {
-            console.log('Задания на сервере:', data);  // Выводим все задания в консоль
-
-            // Проходим по всем задачам и отображаем их на странице
             const taskContainer = document.querySelector('.task-container');
             data.forEach(task => {
                 const taskElement = document.createElement('div');
                 taskElement.classList.add('task');
-                taskElement.style.backgroundColor = "#1e1e1e"; // Можешь выбрать подходящий цвет
+                taskElement.style.backgroundColor = "#1e1e1e"; // Цвет задачи
 
-                // Заполняем содержимое задачи
                 taskElement.innerHTML = `
                     <strong>${task.task_title}</strong><br>
                     ${task.task_created_date}<br>
                     ${task.task_description}<br>
-                    Важность: ${task.task_importance}
+                    Важность: 0<br>
+                    Архивирован: ${task.is_archived === 1 ? 'Да' : 'Нет'}
                 `;
 
-                // Добавляем обработчик для клика по задаче
                 taskElement.addEventListener('click', function () {
                     document.getElementById('detail-title').textContent = task.task_title;
                     document.getElementById('detail-desc').textContent = task.task_description;
@@ -75,6 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => {
-            console.error('Ошибка при запросе:', error);  // Обрабатываем ошибки
+            console.error('Ошибка при запросе:', error);
         });
 });
