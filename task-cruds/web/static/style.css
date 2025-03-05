@@ -87,7 +87,8 @@ button {
 
 input[type="text"],
 textarea,
-input[type="color"] {
+input[type="color"],
+input[type="date"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -95,11 +96,13 @@ input[type="color"] {
     border: 1px solid #444;
     background-color: #555;
     color: white;
+    text-align: center;
 }
 
 input[type="text"]:focus,
 textarea:focus,
-input[type="color"]:focus {
+input[type="color"]:focus,
+input[type="date"]:focus {
     outline: none;
     border-color: #28a745;
 }

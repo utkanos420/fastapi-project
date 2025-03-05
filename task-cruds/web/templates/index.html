@@ -21,18 +21,19 @@
         <button id="add-task">Добавить задание</button>
     </div>
 
-    <!-- Модальное окно для добавления задания -->
     <div id="task-modal" class="modal hidden">
         <div class="modal-content">
-            <input type="text" id="task-title" placeholder="Название задания (макс. 15 символов)" maxlength="15">
-            <textarea id="task-desc" placeholder="Описание задания (макс. 500 символов)" maxlength="500"></textarea>
+            <input type="text" id="task-title" placeholder="Название задачи" maxlength="15">
+            <textarea id="task-desc" placeholder="Текст задачи" maxlength="500"></textarea>
+
+            <label for="task-date">Выполнить до:</label>
             <input type="date" id="task-date">
+
             <input type="color" id="task-color">
-            <button id="save-task">Сохранить</button>
+            <button id="save-task">Добавить задачу</button>
         </div>
     </div>
 
-    <!-- Модальное окно для детального просмотра задания -->
     <div id="task-detail-modal" class="modal hidden">
         <div class="modal-content">
             <h3 id="detail-title"></h3>
