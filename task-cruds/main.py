@@ -49,5 +49,5 @@ async def get_tasks(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app=app, port=2833, log_level="debug")
+    uvicorn.run(app=app, port=2211, log_level="debug")
 

@@ -2,6 +2,10 @@ document.getElementById('add-task').addEventListener('click', function () {
     document.getElementById('task-modal').classList.remove('hidden');
 });
 
+document.getElementById('filter-task').addEventListener('click', function () {
+    alert('Фильтрация пока не доступна.');
+});
+
 document.getElementById('save-task').addEventListener('click', function () {
     const title = document.getElementById('task-title').value;
     const desc = document.getElementById('task-desc').value;
@@ -59,6 +63,9 @@ document.getElementById('save-task').addEventListener('click', function () {
             });
 
             taskContainer.appendChild(taskElement);
+
+            // Обновляем статистику
+            updateStatistics();
         })
         .catch(error => {
             console.error('Ошибка при добавлении задачи:', error);
@@ -67,11 +74,16 @@ document.getElementById('save-task').addEventListener('click', function () {
     document.getElementById('task-modal').classList.add('hidden');
 });
 
+// Закрытие модального окна добавления задачи
+document.getElementById('close-task-modal').addEventListener('click', function () {
+    document.getElementById('task-modal').classList.add('hidden');
+});
+
 document.getElementById('close-detail').addEventListener('click', function () {
     document.getElementById('task-detail-modal').classList.add('hidden');
 });
 
-// Логика для получения всех задач
+// Логика для получения всех задач и статистики
 document.addEventListener('DOMContentLoaded', function () {
     fetch('/api/v1/tasks')
         .then(response => response.json())
@@ -98,8 +110,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 taskContainer.appendChild(taskElement);
             });
+
+            // Обновляем статистику после загрузки задач
+            updateStatistics();
         })
         .catch(error => {
             console.error('Ошибка при запросе:', error);
         });
 });
+
+// Функция для обновления статистики
+function updateStatistics() {
+    fetch('/api/v1/tasks')
+        .then(response => response.json())
+        .then(data => {
+            const totalTasks = data.length;
+            const archivedTasks = data.filter(task => task.is_archived === 1).length;
+            const averageImportance = data.reduce((sum, task) => sum + task.task_importance, 0) / totalTasks || 0;
+
+            // Обновляем отображение статистики
+            document.getElementById('total-tasks').textContent = totalTasks;
+            document.getElementById('archived-tasks').textContent = archivedTasks;
+            document.getElementById('avg-importance').textContent = averageImportance.toFixed(2);
+        });
+}

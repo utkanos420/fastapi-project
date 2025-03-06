@@ -1,6 +1,8 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 
+import sqlalchemy as sa
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
 
 from core.models import db_helper
 from . import crud
@@ -64,3 +66,7 @@ async def delete_task(
 ) -> None:
     await crud.delete_task(session=session, task_in=task)
     
+async def get_task_count(session: AsyncSession):
+    result = await session.execute(select(sa.func.count()).select_from(Task))
+    count = result.scalar()
+    return count

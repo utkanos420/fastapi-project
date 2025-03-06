@@ -17,12 +17,28 @@
         </nav>
     </header>
     <div class="main-container">
-        <div class="task-container"></div>
-        <button id="add-task">Добавить задание</button>
+        <!-- Контейнер кнопок -->
+        <div class="button-container">
+            <button id="add-task" class="task add-task">Добавить задачу</button>
+            <button id="filter-task" class="task filter-task">Фильтровать по</button>
+        </div>
+        
+        <div class="task-container">
+            <!-- Сюда будут добавляться задачи -->
+        </div>
+        
+        <div class="statistics-container">
+            <h3>Статистика</h3>
+            <p>Общее количество задач: <span id="total-tasks">0</span></p>
+            <p>Архивированные задачи: <span id="archived-tasks">0</span></p>
+            <p>Средняя важность: <span id="avg-importance">0</span></p>
+        </div>
     </div>
 
+    <!-- Модальные окна для добавления задачи и детальной информации -->
     <div id="task-modal" class="modal hidden">
         <div class="modal-content">
+            <button id="close-task-modal" class="close-btn">Закрыть</button>
             <input type="text" id="task-title" placeholder="Название задачи" maxlength="15">
             <textarea id="task-desc" placeholder="Текст задачи" maxlength="500"></textarea>
 
