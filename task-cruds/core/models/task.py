@@ -18,7 +18,7 @@ class Task(Base):
     is_archived: Mapped[int] = mapped_column(Integer, default=0)
 
 
-class NewTable(Base):
+class Habits(Base):
     __tablename__ = "habits"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)

@@ -8,6 +8,7 @@ class HabitBase(BaseModel):
     habit_color: str
     is_archived: int
 
+
 class HabitCreate(HabitBase):
     pass
 
@@ -23,4 +24,3 @@ class HabitUpdatePartial(HabitCreate):
 
 class Habit(HabitBase):
     model_config = ConfigDict(from_attributes=True)
-    id: int

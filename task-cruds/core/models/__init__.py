@@ -3,9 +3,9 @@ __all__ = (
     "DatabaseHelper",
     "db_helper",
     "Task",
-    "NewTable"
+    "Habits"
 )
 
 from .base import Base
 from .db_helper import DatabaseHelper, db_helper
-from .task import Task, NewTable
+from .task import Task, Habits

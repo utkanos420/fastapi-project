@@ -4,7 +4,7 @@ from fastapi import Path, Depends, HTTPException, status
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from core.models import db_helper, NewTable
+from core.models import db_helper, Habits
 
 from . import habits_crud
 
@@ -12,7 +12,7 @@ from . import habits_crud
 async def habit_by_id(
         habit_id: Annotated[int, Path],
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
-) -> NewTable:
+) -> Habits:
     
     newtable = await habits_crud.get_habit(session=session, habit_id=habit_id)
     if newtable is not None:
