@@ -17,29 +17,38 @@
         </nav>
     </header>
     <div class="main-container">
-        <!-- Контейнер кнопок -->
-        <div class="button-container">
-            <button id="add-task" class="task add-task">Добавить задачу</button>
-            <button id="filter-task" class="task filter-task">Фильтровать по</button>
+        <!-- Новые блоки, которые будут над задачами -->
+        <div class="top-blocks">
+            <div class="top-block">
+                <!-- Место для содержимого первого блока -->
+                <p style="font-weight: bold;"><span id="total-tasks">0</span></p>
+                <p>Архивированные задачи: <span id="archived-tasks">0</span></p>
+            </div>
+            <div class="top-block">
+                <!-- Место для содержимого второго блока -->
+                 <p>hello</p>
+            </div>
         </div>
-        
+
         <div class="task-container">
             <!-- Сюда будут добавляться задачи -->
         </div>
         
         <div class="statistics-container">
-            <h3>Статистика</h3>
-            <p>Общее количество задач: <span id="total-tasks">0</span></p>
-            <p>Архивированные задачи: <span id="archived-tasks">0</span></p>
-            <p>Средняя важность: <span id="avg-importance">0</span></p>
+        </div>
+
+        <!-- Контейнер кнопок внизу -->
+        <div class="button-container">
+            <button id="add-task" class="task add-task">Добавить задачу</button>
+            <button id="filter-task" class="task filter-task">Фильтровать по</button>
         </div>
     </div>
 
     <!-- Модальные окна для добавления задачи и детальной информации -->
     <div id="task-modal" class="modal hidden">
         <div class="modal-content">
-            <button id="close-task-modal" class="close-btn">Закрыть</button>
-            <input type="text" id="task-title" placeholder="Название задачи" maxlength="15">
+            <p style="font-weight: bold;">Добавление задачи</p>
+            <input type="text" id="task-title" placeholder="Название задачи" maxlength="30">
             <textarea id="task-desc" placeholder="Текст задачи" maxlength="500"></textarea>
 
             <label for="task-date">Выполнить до:</label>
@@ -47,6 +56,7 @@
 
             <input type="color" id="task-color">
             <button id="save-task">Добавить задачу</button>
+            <button id="close-task-modal" class="close-btn">Закрыть</button>
         </div>
     </div>
 
@@ -60,6 +70,9 @@
         </div>
     </div>
 
-    <script src="/static/main.js"></script>
+    <p>Процент выполненных задач: <span id="completed-tasks">0</span></p>
+
+
+    <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 </body>
 </html>
