@@ -25,8 +25,6 @@ class TaskUpdatePartial(TaskCreate):
     task_created_date: str | None = None
     task_created_until_date: str | None = None
 
-
-
 class Task(TaskBase):
     model_config = ConfigDict(from_attributes=True)
     id: int

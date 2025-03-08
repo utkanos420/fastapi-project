@@ -39,7 +39,6 @@ async def update_task(
 
     return task
 
-
 async def delete_task(session: AsyncSession, task_in: Task) -> None:
     await session.delete(task_in)
     await session.commit()

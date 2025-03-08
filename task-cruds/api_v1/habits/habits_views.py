@@ -9,6 +9,7 @@ from . import habits_crud
 from .habits_schemas import Habit, HabitCreate, HabitUpdate, HabitUpdatePartial
 from .habits_dependencies import habit_by_id
 
+
 habits_router = APIRouter()
 
 @habits_router.get("/", response_model=list[Habit])

@@ -9,8 +9,8 @@ from . import crud
 from .schemas import Task, TaskCreate, TaskUpdate, TaskUpdatePartial
 from .dependencies import task_by_id
 
-crud_router = APIRouter()
 
+crud_router = APIRouter()
 
 @crud_router.get("/", response_model=list[Task], tags=["tasks"])
 async def get_tasks(session: AsyncSession = Depends(db_helper.session_dependency)):

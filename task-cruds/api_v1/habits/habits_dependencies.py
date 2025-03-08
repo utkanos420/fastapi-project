@@ -8,6 +8,7 @@ from core.models import db_helper, NewTable
 
 from . import habits_crud
 
+
 async def habit_by_id(
         habit_id: Annotated[int, Path],
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
