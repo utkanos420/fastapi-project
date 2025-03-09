@@ -1,7 +1,14 @@
-// static/main.js
 import { addTask, loadTasks } from './modules/tasks.js';
-
 import { updateStatistics } from './modules/tasks-stats.js';
+
+document.querySelectorAll('.color-block').forEach(block => {
+    block.addEventListener('click', function() {
+        // Обновляем выбранный цвет
+        const selectedColor = this.getAttribute('data-color');
+        document.getElementById('custom-color-block').style.backgroundColor = selectedColor;
+        document.getElementById('task-color').value = selectedColor;  // Если нужно, можно использовать скрытое поле input[type="color"]
+    });
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     updateStatistics(); // Обновляем статистику при загрузке страницы
@@ -11,6 +18,13 @@ document.getElementById('add-task').addEventListener('click', () => {
     document.getElementById('task-modal').classList.remove('hidden');
 });
 
+document.getElementById('task-color').addEventListener('input', function(event) {
+    const selectedColor = event.target.value;
+    // Обновляем цвет полоски с помощью выбранного значения
+    document.getElementById('task-color').style.backgroundColor = selectedColor;
+});
+
+// Сохраняем выбранный цвет задачи
 document.getElementById('save-task').addEventListener('click', () => {
     const title = document.getElementById('task-title').value;
     const desc = document.getElementById('task-desc').value;

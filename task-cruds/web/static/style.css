@@ -41,15 +41,6 @@ body {
     width: 100%;
     gap: 10px;
     margin-bottom: 20px;
-    align-items: center;
-}
-
-.top-blocks {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    gap: 10px;
-    margin-bottom: 20px;
     align-items: stretch;  /* Блоки растягиваются по высоте */
 }
 
@@ -65,13 +56,11 @@ body {
     height: auto;  /* Высота блока адаптируется под содержимое */
 }
 
-
 .last-updated,
 .remaining-tasks {
     font-size: 0.9rem;
     color: gray;
 }
-
 
 .button-container {
     display: flex;
@@ -160,38 +149,86 @@ button {
 
 .modal-content {
     background: #333;
-    padding: 20px;
-    border-radius: 5px;
+    padding: 30px;
+    border-radius: 10px;
     position: relative;
+    width: 700px; /* Расширили ширину формы */
+    min-width: 700px;
+    color: #fff;
 }
 
-input[type="text"],
-textarea,
-input[type="color"],
-input[type="date"] {
+.modal-content input,
+.modal-content textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #444;
-    background-color: #555;
-    color: white;
-    text-align: center;
+    background: #555;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
-input[type="text"]:focus,
-textarea:focus,
-input[type="color"]:focus,
-input[type="date"]:focus {
+.modal-content input[type="date"] {
+    background-color: #444;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
     outline: none;
     border-color: #28a745;
 }
 
-.close-btn {
-    padding: 10px;
+.modal-content label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+}
+
+.modal-content button {
     background: #28a745;
     color: white;
     border: none;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background: #218838;
+}
+
+.color-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.color-picker span {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.color-input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #555;
+    text-align: center;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.color-input:focus {
+    outline: none;
+    border-color: #28a745;
+}
+
+/* Убираем кнопку закрытия на самой форме */
+#close-task-modal {
+    display: none;
 }

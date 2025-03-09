@@ -55,15 +55,20 @@
             <p style="font-weight: bold;">Добавление задачи</p>
             <input type="text" id="task-title" placeholder="Название задачи" maxlength="30">
             <textarea id="task-desc" placeholder="Текст задачи" maxlength="500"></textarea>
-
+        
             <label for="task-date">Выполнить до:</label>
             <input type="date" id="task-date">
-
-            <input type="color" id="task-color">
+        
+            <div class="color-picker">
+                <span>Выберите цвет:</span>
+                <input type="color" id="task-color" class="color-input" style="width: 100%;" />
+            </div>
+        
             <button id="save-task">Добавить задачу</button>
             <button id="close-task-modal" class="close-btn">Закрыть</button>
         </div>
     </div>
+    
 
     <div id="task-detail-modal" class="modal hidden">
         <div class="modal-content">
