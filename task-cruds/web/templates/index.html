@@ -21,12 +21,17 @@
         <div class="top-blocks">
             <div class="top-block">
                 <!-- Место для содержимого первого блока -->
-                <p style="font-weight: bold;"><span id="total-tasks">0</span></p>
-                <p>Архивированные задачи: <span id="archived-tasks">0</span></p>
+                <div class="top-block-content">
+                    <p style="font-weight: bold; font-size: 30px;"><span id="total-tasks">0</span></p>
+                    <p class="last-updated">Последнее обновление: <span id="last-updated">неизвестно</span></p>
+                </div>
             </div>
             <div class="top-block">
                 <!-- Место для содержимого второго блока -->
-                 <p>hello</p>
+                <div class="top-block-content">
+                    <p style="font-weight: bold; color: rgb(71, 245, 71); font-size: 30px;"><span id="completed-percentage">0</span>% выполнено</p>
+                    <p class="remaining-tasks">Осталось выполнить: <span id="remaining-tasks">0</span> задач</p>
+                </div>
             </div>
         </div>
 
@@ -69,9 +74,6 @@
             <button id="close-detail">Закрыть</button>
         </div>
     </div>
-
-    <p>Процент выполненных задач: <span id="completed-tasks">0</span></p>
-
 
     <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 </body>

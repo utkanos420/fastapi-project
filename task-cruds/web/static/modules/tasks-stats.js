@@ -4,7 +4,7 @@ export function updateStatistics() {
     fetch('/api/v1/tasks')
         .then(response => response.json())
         .then(data => {
-            const totalTasks = data.length + ' Зарегистрированных задач';
+            const totalTasks = data.length + ' активных задачи';
             const archivedTasks = data.filter(task => task.is_archived === 1).length;
             const averageImportance = data.reduce((sum, task) => sum + task.task_importance, 0) / totalTasks || 0;
             const countCompletedTasks = (data.filter(task => task.is_archived === 1).length / data.length) * 100 + ' %';

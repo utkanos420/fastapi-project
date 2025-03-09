@@ -44,15 +44,34 @@ body {
     align-items: center;
 }
 
+.top-blocks {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: stretch;  /* Блоки растягиваются по высоте */
+}
+
 .top-block {
     flex: 1;
     background-color: #303030;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px 20px;
     text-align: left;
-    height: 25px;
-
+    display: flex;
+    flex-direction: column;  /* Вертикальное выравнивание элементов */
+    justify-content: center;  /* Центрирование содержимого по вертикали */
+    height: auto;  /* Высота блока адаптируется под содержимое */
 }
+
+
+.last-updated,
+.remaining-tasks {
+    font-size: 0.9rem;
+    color: gray;
+}
+
 
 .button-container {
     display: flex;
