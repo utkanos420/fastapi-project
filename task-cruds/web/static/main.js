@@ -42,7 +42,7 @@ document.getElementById('save-task').addEventListener('click', () => {
         task_importance: 0,
         task_created_date: new Date().toISOString(),
         task_created_until_date: dueDate,
-        is_archived: 0,
+        is_completed: 0,
     };
 
     addTask(taskData, color);

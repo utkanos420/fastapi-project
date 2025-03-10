@@ -15,7 +15,7 @@ class Task(Base):
     task_created_date: Mapped[str] = mapped_column(String(50), nullable=False)
     task_created_until_date: Mapped[str] = mapped_column(String(50), nullable=False)
     task_color: Mapped[str] = mapped_column(String(7), nullable=False, default="#0E0E10", server_default="#0E0E10")
-    is_archived: Mapped[int] = mapped_column(Integer, default=0)
+    is_completed: Mapped[int] = mapped_column(Integer, default=0)
 
 
 class Habits(Base):
@@ -25,4 +25,4 @@ class Habits(Base):
     habit_title: Mapped[str] = mapped_column(String(255), nullable=False)
     habit_counter: Mapped[int] = mapped_column(Integer, nullable=False)  # исправлено
     habit_color: Mapped[str] = mapped_column(String(7), nullable=False, default="#0E0E10", server_default="#0E0E10")  # исправлено
-    is_archived: Mapped[int] = mapped_column(Integer, default=0)
+    is_completed: Mapped[int] = mapped_column(Integer, default=0)
