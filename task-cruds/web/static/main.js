@@ -1,3 +1,5 @@
+
+// main.js
 import { addTask, loadTasks, toggleCompletedTasks } from './modules/tasks.js';
 import { updateStatistics } from './modules/tasks-stats.js';
 

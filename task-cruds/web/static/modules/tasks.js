@@ -1,3 +1,6 @@
+
+// tasks.js
+
 export function addTask(taskData, color) {
     fetch('/api/v1/tasks/', {
         method: 'POST',
@@ -31,7 +34,7 @@ function renderTask(task, color) {
 }
 
 // Отображение деталей задачи
-function showTaskDetails(task) {
+export function showTaskDetails(task) {
     document.getElementById('detail-title').textContent = task.task_title;
     document.getElementById('detail-desc').textContent = task.task_description;
     document.getElementById('detail-date').textContent = task.task_created_until_date;

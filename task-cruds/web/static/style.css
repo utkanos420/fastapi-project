@@ -26,6 +26,7 @@ body {
     cursor: pointer;
 }
 
+/* Блоки в основном контейнере также не должны растягиваться */
 .main-container {
     display: flex;
     justify-content: space-between;
@@ -33,6 +34,7 @@ body {
     margin: 20px auto;
     text-align: center;
     flex-wrap: wrap;
+    gap: 10px; /* Добавим отступы между блоками */
 }
 
 .top-blocks {
@@ -71,6 +73,7 @@ body {
     text-align: left;
 }
 
+/* Ограничим ширину контейнера задач */
 .task-container {
     display: flex;
     flex-wrap: wrap;
@@ -80,8 +83,11 @@ body {
     background-color: #303030;
     border-radius: 10px;
     flex: 1;
+    max-width: 100%; /* Ограничиваем ширину контейнера */
+    overflow: hidden; /* Предотвращаем растягивание */
 }
 
+/* Стиль для контейнера статистики */
 .statistics-container {
     background-color: #303030;
     border-radius: 10px;
@@ -91,18 +97,63 @@ body {
     text-align: left;
 }
 
+/* Заголовок статистики */
 .statistics-container h3 {
     margin-bottom: 20px;
     text-align: center;
+    color: #fff;
+}
+
+/* Эффект при наведении на карточку задачи */
+.task-card:hover {
+    background-color: #3e8e41; /* Темнее при наведении */
+}
+
+/* Стиль для кнопки перехода */
+.view-task-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Эффект при наведении на кнопку */
+.view-task-btn:hover {
+    background-color: #0056b3;
+}
+
+.task-card {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    background-color: #59ff49;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Стиль для карточки последней задачи */
+.last-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .task {
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    min-width: 100px;
-    max-width: 150px;
-    flex: 1;
+    min-width: 150px; /* Установим минимальную ширину */
+    max-width: 200px; /* Ограничим максимальную ширину */
+    flex: 0 1 auto; /* Блоки не будут растягиваться */
     background: #59ff49;
     color: white;
     cursor: pointer;
