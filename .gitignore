@@ -1,0 +1,6 @@
+products-crud
+.venv
+__pycache__
+db.sqlite3
+saves.txt
+tests.py

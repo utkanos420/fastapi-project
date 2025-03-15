@@ -1,4 +1,4 @@
-import { addTask, loadTasks } from './modules/tasks.js';
+import { addTask, loadTasks, toggleCompletedTasks } from './modules/tasks.js';
 import { updateStatistics } from './modules/tasks-stats.js';
 
 document.querySelectorAll('.color-block').forEach(block => {
@@ -11,8 +11,11 @@ document.querySelectorAll('.color-block').forEach(block => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
     updateStatistics(); // Обновляем статистику при загрузке страницы
 });
+
+document.getElementById('showCompleted').addEventListener('click', toggleCompletedTasks);
 
 document.getElementById('add-task').addEventListener('click', () => {
     document.getElementById('task-modal').classList.remove('hidden');

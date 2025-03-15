@@ -1,5 +1,3 @@
-// static/modules/tasks.js
-
 export function addTask(taskData, color) {
     fetch('/api/v1/tasks/', {
         method: 'POST',
@@ -16,6 +14,8 @@ export function addTask(taskData, color) {
 
 // Отображение задачи в UI
 function renderTask(task, color) {
+    if (!showCompleted && task.is_completed === 1) return; // Скрываем выполненные, если флаг отключен
+
     const taskContainer = document.querySelector('.task-container');
     const taskElement = document.createElement('div');
     taskElement.classList.add('task');
@@ -38,13 +38,22 @@ function showTaskDetails(task) {
     document.getElementById('task-detail-modal').classList.remove('hidden');
 }
 
-// Загрузка всех задач
+let showCompleted = false; // Флаг для отображения выполненных задач
+
+// Загрузка всех задач с учетом фильтрации
 export function loadTasks() {
     fetch('/api/v1/tasks')
         .then(response => response.json())
         .then(data => {
             document.querySelector('.task-container').innerHTML = "";
-            data.forEach(task => renderTask(task, "#1e1e1e"));
+            data.forEach(task => renderTask(task, "#28A745"));
         })
         .catch(error => console.error('Ошибка при загрузке задач:', error));
+}
+
+// Переключение отображения выполненных задач
+export function toggleCompletedTasks() {
+    showCompleted = !showCompleted;
+    document.getElementById('showCompleted').textContent = showCompleted ? "Скрыть выполненные" : "Показать выполненные";
+    loadTasks(); // Перезагрузка списка с учетом флага
 }
