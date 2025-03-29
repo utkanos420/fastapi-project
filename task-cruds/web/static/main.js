@@ -2,6 +2,7 @@
 // main.js
 import { addTask, loadTasks, toggleCompletedTasks } from './modules/tasks.js';
 import { updateStatistics } from './modules/tasks-stats.js';
+import './modules/tasks-chart.js';
 
 document.querySelectorAll('.color-block').forEach(block => {
     block.addEventListener('click', function() {
@@ -33,7 +34,7 @@ document.getElementById('task-color').addEventListener('input', function(event) 
 document.getElementById('save-task').addEventListener('click', () => {
     const title = document.getElementById('task-title').value;
     const desc = document.getElementById('task-desc').value;
-    const dueDate = document.getElementById('task-date').value;
+    const dueDate = new Date(document.getElementById('task-date').value).toISOString().split('T')[0];
     const color = document.getElementById('task-color').value;
 
     if (!title || !desc || !dueDate) {
@@ -48,8 +49,10 @@ document.getElementById('save-task').addEventListener('click', () => {
         task_created_date: new Date().toISOString(),
         task_created_until_date: dueDate,
         is_completed: 0,
+        task_color: color
     };
 
+    console.log('Отправляемые данные:', taskData);
     addTask(taskData, color);
     document.getElementById('task-modal').classList.add('hidden');
 });

@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список заданий</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Список заданий</title>
+        <link rel="stylesheet" href="/static/style.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        
+        <!-- Основной скрипт -->
+        <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
+
+        <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
+
+    </head>
 <body>
     <header class="top-bar">
         <nav>
@@ -80,6 +90,11 @@
             <button id="close-detail">Закрыть</button>
         </div>
     </div>
+
+    <div class="chart-container">
+        <canvas id="taskChart"></canvas>
+    </div>
+    
 
     <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 </body>
