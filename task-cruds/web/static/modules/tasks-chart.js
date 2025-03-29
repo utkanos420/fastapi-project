@@ -1,80 +1,79 @@
 // tasks-chart.js
 import { getTasks } from './task.js';
 
-// Глобальная переменная для хранения экземпляра графика
-let taskChartInstance = null;
+let taskTimelineInstance = null;
 
 export async function initTaskChart() {
     try {
-        // Ожидаем загрузки всех зависимостей
         await waitForDependencies();
-        
         const canvas = document.getElementById('taskChart');
-        if (!canvas) {
-            console.error('Canvas element not found');
-            return;
-        }
+        if (!canvas) return;
         
         const tasks = await getTasks();
-        renderChart(canvas, tasks);
+        renderTimeline(canvas, tasks);
     } catch (error) {
-        console.error('Failed to initialize chart:', error);
-        showErrorMessage();
+        console.error('Ошибка инициализации:', error);
+        showError();
     }
 }
 
 function waitForDependencies() {
     return new Promise((resolve) => {
-        const checkDeps = () => {
-            if (window.Chart && window.chroma) {
-                resolve();
-            } else {
-                setTimeout(checkDeps, 100);
-            }
+        const check = () => {
+            if (window.Chart && window.chroma) resolve();
+            else setTimeout(check, 100);
         };
-        checkDeps();
+        check();
     });
 }
 
-function renderChart(canvas, tasks) {
+function renderTimeline(canvas, tasks) {
     const ctx = canvas.getContext('2d');
-    const preparedData = prepareChartData(tasks);
+    const { timelineData, dateRange } = prepareTimelineData(tasks);
     
-    // Удаляем предыдущий график если существует
-    if (taskChartInstance) {
-        taskChartInstance.destroy();
-    }
+    // Очищаем предыдущий график
+    if (taskTimelineInstance) taskTimelineInstance.destroy();
     
-    // Если нет данных для отображения
-    if (preparedData.labels.length === 0) {
-        canvas.style.display = 'none';
-        const container = canvas.parentElement;
-        container.innerHTML = '<p class="no-data-message">Нет задач с указанными сроками выполнения</p>';
-        return;
-    }
-    
-    taskChartInstance = new Chart(ctx, {
+    // Создаём временную шкалу
+    taskTimelineInstance = new Chart(ctx, {
         type: 'bar',
-        data: preparedData,
-        options: getChartOptions()
+        data: timelineData,
+        options: getTimelineOptions(dateRange)
     });
 }
 
-function prepareChartData(tasks) {
+function prepareTimelineData(tasks) {
     const validTasks = tasks
         .filter(task => task.task_created_until_date)
         .sort((a, b) => new Date(a.task_created_until_date) - new Date(b.task_created_until_date));
     
+    // Определяем диапазон дат
+    const dates = validTasks.map(t => new Date(t.task_created_until_date));
+    const minDate = new Date(Math.min(...dates));
+    const maxDate = new Date(Math.max(...dates));
+    minDate.setDate(minDate.getDate() - 2);
+    maxDate.setDate(maxDate.getDate() + 2);
+    
+    // Формируем данные для графика
+    const datasets = validTasks.map(task => ({
+        label: task.task_title,
+        data: [{
+            x: task.task_created_until_date,
+            y: 0,
+            task: task
+        }],
+        backgroundColor: getValidColor(task.task_color),
+        borderColor: chroma(getValidColor(task.task_color)).darken(0.5).hex(),
+        borderWidth: 1,
+        borderRadius: 4,
+        barThickness: 20
+    }));
+    
     return {
-        labels: validTasks.map(task => task.task_title),
-        datasets: [{
-            label: 'Дней до дедлайна',
-            data: validTasks.map(task => calculateDaysUntilDue(task.task_created_until_date)),
-            backgroundColor: validTasks.map(task => getValidColor(task.task_color)),
-            borderColor: validTasks.map(task => chroma(getValidColor(task.task_color)).darken(0.5).hex()),
-            borderWidth: 1,
-            borderRadius: 4
-        }]
+        timelineData: {
+            datasets: datasets
+        },
+        dateRange: { min: minDate, max: maxDate }
     };
 }
 
@@ -86,47 +85,61 @@ function getValidColor(color) {
     }
 }
 
-function calculateDaysUntilDue(dueDate) {
-    const diff = new Date(dueDate) - new Date();
-    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-}
-
-function getChartOptions() {
+function getTimelineOptions(dateRange) {
     return {
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day',
+                    displayFormats: { day: 'd MMM' },
+                    tooltipFormat: 'd MMM yyyy'
+                },
+                min: dateRange.min,
+                max: dateRange.max,
+                position: 'bottom',
+                grid: {
+                    display: true,
+                    color: 'rgba(0,0,0,0.05)'
+                },
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 0
+                }
+            },
+            y: {
+                display: false,
+                beginAtZero: true
+            }
+        },
         plugins: {
             legend: { display: false },
             tooltip: {
                 callbacks: {
-                    label: (context) => {
-                        const days = context.raw;
-                        return `${days} ${days % 10 === 1 ? 'день' : 'дней'} до дедлайна`;
+                    title: (items) => items[0].raw.task.task_title,
+                    label: (item) => {
+                        const task = item.raw.task;
+                        const date = new Date(task.task_created_until_date).toLocaleDateString('ru-RU');
+                        return [
+                            `Срок: ${date}`,
+                            `Статус: ${task.is_completed ? '✅ Выполнена' : '❌ Не выполнена'}`,
+                            task.task_description || 'Без описания'
+                        ];
                     }
-                }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: { display: true, text: 'Дней до дедлайна' }
-            },
-            x: {
-                ticks: {
-                    maxRotation: 45,
-                    minRotation: 45
                 }
             }
         }
     };
 }
 
-function showErrorMessage() {
+function showError() {
     const container = document.querySelector('.chart-container');
     if (container) {
-        container.innerHTML = '<p class="error-message">Не удалось загрузить график</p>';
+        container.innerHTML = '<p class="error">Не удалось загрузить временную шкалу</p>';
     }
 }
 
-// Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', initTaskChart);
