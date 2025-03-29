@@ -188,9 +188,11 @@ button {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
 }
 
 .modal.hidden {
@@ -291,15 +293,15 @@ button {
 
 .chart-container {
     width: 100%;
-    height: 180px;
+    height: 200px;
     background: #303030;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 #taskChart {
-    width: 100% !important; /* Важно для Chart.js */
+    width: 100% !important;
     height: 100% !important;
 }
 
@@ -315,4 +317,11 @@ button {
     text-align: center;
     padding: 2rem;
     font-weight: bold;
+}
+
+.no-data, .error {
+    color: #aaa;
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
 }
