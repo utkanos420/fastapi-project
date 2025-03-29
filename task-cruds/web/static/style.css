@@ -284,35 +284,35 @@ button {
 }
 
 
+.chart-outer-container {
+    width: 80%;
+    margin: 2rem 10%; /* 10% отступы по бокам */
+}
+
 .chart-container {
     width: 100%;
-    height: 150px; /* Уменьшенная высота для ленты */
-    margin: 2rem 0;
-    overflow-x: auto;
-    background: #f9f9f9;
+    height: 180px;
+    background: #303030;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #taskChart {
-    min-width: 1000px; /* Минимальная ширина для ленты */
+    width: 100% !important; /* Важно для Chart.js */
+    height: 100% !important;
 }
 
-.chart-container > p {
-    color: #666;
-    font-style: italic;
-}
-
-.no-data-message, 
-.error-message {
+.no-data-message {
+    color: #aaa;
     text-align: center;
-    color: #666;
-    font-style: italic;
     padding: 2rem;
+    font-style: italic;
 }
 
-.error {
-    color: #ff4444;
+.error-message {
+    color: #ff6b6b;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
+    font-weight: bold;
 }

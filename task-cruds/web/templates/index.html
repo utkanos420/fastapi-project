@@ -91,10 +91,11 @@
         </div>
     </div>
 
-    <div class="chart-container">
-        <canvas id="taskChart"></canvas>
+    <div class="chart-outer-container">
+        <div class="chart-container">
+            <canvas id="taskChart"></canvas>
+        </div>
     </div>
-    
 
     <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 </body>
