@@ -4,6 +4,7 @@ body {
     color: #ffffff;
     margin: 0;
     padding: 0;
+    position: relative; /* Убедимся, что у body есть контекст для позиционирования */
 }
 
 .top-bar {
@@ -36,7 +37,8 @@ body {
     text-align: center;
     flex-wrap: wrap;
     font-family: Arial, sans-serif;
-    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 1;
 }
 
 .top-blocks {
@@ -281,7 +283,7 @@ button {
 }
 
 
-.resize-warning {
+#resize-warning {
     display: none; /* Скрыть по умолчанию */
     position: fixed;
     top: 50%;
@@ -294,6 +296,17 @@ button {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    z-index: 10000; /* Убедитесь, что блок поверх остальных */
+    z-index: 10001; /* Убедимся, что блок поверх остальных */
     font-family: Arial, sans-serif;
+}
+
+#blur-background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Эффект блюра */
+    z-index: 10000; /* Размещаем под содержимым */
 }

@@ -89,10 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function checkWindowSize() {
     const warning = document.getElementById('resize-warning');
+    const blurBackground = document.getElementById('blur-background');
+
     if (window.innerWidth < 800) { // Устанавливаем минимальную ширину для отображения предупреждения
         warning.style.display = 'block';
+        blurBackground.style.display = 'block'; // Показываем блюр
     } else {
         warning.style.display = 'none';
+        blurBackground.style.display = 'none'; // Скрываем блюр
     }
 }
 
