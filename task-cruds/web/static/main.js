@@ -86,3 +86,17 @@ document.getElementById('close-detail').addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
 });
+
+function checkWindowSize() {
+    const warning = document.getElementById('resize-warning');
+    if (window.innerWidth < 800) { // Устанавливаем минимальную ширину для отображения предупреждения
+        warning.style.display = 'block';
+    } else {
+        warning.style.display = 'none';
+    }
+}
+
+// Проверка при загрузке страницы и при изменении размера окна
+window.addEventListener('load', checkWindowSize);
+window.addEventListener('resize', checkWindowSize);
+

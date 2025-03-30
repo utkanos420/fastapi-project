@@ -10,6 +10,7 @@ body {
     background-color: #171717;
     padding: 15px 0;
     text-align: center;
+    font-family: Arial, sans-serif;
 }
 
 .top-bar ul {
@@ -24,6 +25,7 @@ body {
     display: inline;
     font-size: 18px;
     cursor: pointer;
+    font-family: Arial, sans-serif;
 }
 
 .main-container {
@@ -33,6 +35,8 @@ body {
     margin: 20px auto;
     text-align: center;
     flex-wrap: wrap;
+    font-family: Arial, sans-serif;
+    backdrop-filter: blur(5px);
 }
 
 .top-blocks {
@@ -54,12 +58,14 @@ body {
     flex-direction: column;
     justify-content: center;
     height: auto;
+    font-family: Arial, sans-serif;
 }
 
 .last-updated,
 .remaining-tasks {
     font-size: 0.9rem;
     color: gray;
+    font-family: Arial, sans-serif;
 }
 
 .button-container {
@@ -69,6 +75,7 @@ body {
     margin-top: 20px;
     gap: 10px;
     text-align: left;
+    font-family: Arial, sans-serif;
 }
 
 .task-container {
@@ -83,6 +90,7 @@ body {
     max-width: 100%;
     overflow: hidden;
     height: auto;
+    font-family: Arial, sans-serif;
 }
 
 .statistics-container {
@@ -92,12 +100,26 @@ body {
     margin-left: 20px;
     width: 250px;
     text-align: left;
+    font-family: Arial, sans-serif;
 }
 
 .statistics-container h3 {
     margin-bottom: 20px;
     text-align: center;
     color: #fff;
+}
+
+.task-card {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    background-color: #59ff49;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
 }
 
 .task-card:hover {
@@ -112,31 +134,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    text-align: center;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .view-task-btn:hover {
     background-color: #0056b3;
-}
-
-.task-card {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 16px;
-    color: white;
-    background-color: #59ff49;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.last-task {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .task {
@@ -147,23 +152,9 @@ body {
     max-height: 75px;
     max-width: 200px;
     flex: 0 1 auto;
-    background: #59ff49;
     color: white;
     cursor: pointer;
-}
-
-.add-task {
-    background: #28a745;
-    color: white;
-    cursor: pointer;
-    width: 48%;
-}
-
-.filter-task {
-    background: #28a745;
-    color: white;
-    cursor: pointer;
-    width: 48%;
+    font-family: Arial, sans-serif;
 }
 
 button {
@@ -173,6 +164,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: Arial, sans-serif;
 }
 
 .modal {
@@ -201,6 +193,7 @@ button {
     width: 700px;
     min-width: 700px;
     color: #fff;
+    font-family: Arial, sans-serif;
 }
 
 .modal-content input,
@@ -213,6 +206,7 @@ button {
     color: #fff;
     font-size: 16px;
     margin-bottom: 20px;
+    font-family: Arial, sans-serif;
 }
 
 .modal-content input[type="date"] {
@@ -230,6 +224,7 @@ button {
     margin-bottom: 5px;
     display: block;
     text-align: left;
+    font-family: Arial, sans-serif;
 }
 
 .modal-content button {
@@ -241,37 +236,11 @@ button {
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    font-family: Arial, sans-serif;
 }
 
 .modal-content button:hover {
     background: #218838;
-}
-
-.color-picker {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.color-picker span {
-    font-size: 1rem;
-    color: #fff;
-}
-
-.color-input {
-    height: 40px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #555;
-    text-align: center;
-    cursor: pointer;
-    padding: 0 10px;
-}
-
-.color-input:focus {
-    outline: none;
-    border-color: #28a745;
 }
 
 .chart-outer-container {
@@ -293,23 +262,38 @@ button {
     height: 100% !important;
 }
 
-.no-data-message {
-    color: #aaa;
-    text-align: center;
-    padding: 2rem;
-    font-style: italic;
-}
-
+.no-data-message,
 .error-message {
-    color: #ff6b6b;
-    text-align: center;
-    padding: 2rem;
-    font-weight: bold;
-}
-
-.no-data, .error {
     color: #aaa;
     text-align: center;
     padding: 2rem;
     font-style: italic;
+    font-family: Arial, sans-serif;
+}
+
+.no-data,
+.error {
+    color: #aaa;
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    font-family: Arial, sans-serif;
+}
+
+
+.resize-warning {
+    display: none; /* Скрыть по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10000; /* Убедитесь, что блок поверх остальных */
+    font-family: Arial, sans-serif;
 }
