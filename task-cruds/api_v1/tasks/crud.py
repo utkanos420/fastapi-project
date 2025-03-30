@@ -13,8 +13,10 @@ async def get_tasks(session: AsyncSession) -> list[Task]:
     tasks = result.scalars().all()
     return list(tasks)
 
+
 async def get_task(session: AsyncSession, task_id: int) -> Task | None:
     return await session.get(Task, task_id)
+
 
 async def create_task(session: AsyncSession, task_in: TaskCreate) -> Task:
     task = Task(**task_in.model_dump())
@@ -22,6 +24,7 @@ async def create_task(session: AsyncSession, task_in: TaskCreate) -> Task:
     await session.commit()
     # await session.refresh(task)
     return task
+
 
 async def update_task(
     session: AsyncSession,
@@ -38,6 +41,7 @@ async def update_task(
     await session.refresh(task)  # Обновляем объект из БД, чтобы получить актуальные данные
 
     return task
+
 
 async def delete_task(session: AsyncSession, task_in: Task) -> None:
     await session.delete(task_in)

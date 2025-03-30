@@ -41,7 +41,7 @@ body {
     width: 100%;
     gap: 10px;
     margin-bottom: 20px;
-    align-items: stretch;  /* Блоки растягиваются по высоте */
+    align-items: stretch;
 }
 
 .top-block {
@@ -51,9 +51,9 @@ body {
     padding: 10px 20px;
     text-align: left;
     display: flex;
-    flex-direction: column;  /* Вертикальное выравнивание элементов */
-    justify-content: center;  /* Центрирование содержимого по вертикали */
-    height: auto;  /* Высота блока адаптируется под содержимое */
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
 }
 
 .last-updated,
@@ -71,7 +71,6 @@ body {
     text-align: left;
 }
 
-/* Ограничим ширину контейнера задач */
 .task-container {
     display: flex;
     flex-wrap: wrap;
@@ -81,12 +80,11 @@ body {
     background-color: #303030;
     border-radius: 10px;
     flex: 1;
-    max-width: 100%; /* Ограничиваем ширину контейнера */
-    overflow: hidden; /* Предотвращаем растягивание */
-    height: auto; /* Изменение: высота адаптируется под содержимое */
+    max-width: 100%;
+    overflow: hidden;
+    height: auto;
 }
 
-/* Стиль для контейнера статистики */
 .statistics-container {
     background-color: #303030;
     border-radius: 10px;
@@ -96,19 +94,16 @@ body {
     text-align: left;
 }
 
-/* Заголовок статистики */
 .statistics-container h3 {
     margin-bottom: 20px;
     text-align: center;
     color: #fff;
 }
 
-/* Эффект при наведении на карточку задачи */
 .task-card:hover {
-    background-color: #3e8e41; /* Темнее при наведении */
+    background-color: #3e8e41;
 }
 
-/* Стиль для кнопки перехода */
 .view-task-btn {
     padding: 10px 20px;
     background-color: #007bff;
@@ -121,7 +116,6 @@ body {
     margin-top: 10px;
 }
 
-/* Эффект при наведении на кнопку */
 .view-task-btn:hover {
     background-color: #0056b3;
 }
@@ -139,7 +133,6 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Стиль для карточки последней задачи */
 .last-task {
     display: flex;
     flex-direction: column;
@@ -150,9 +143,9 @@ body {
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    min-width: 150px; /* Установим минимальную ширину */
-    max-width: 200px; /* Ограничим максимальную ширину */
-    flex: 0 1 auto; /* Блоки не будут растягиваться */
+    min-width: 150px;
+    max-width: 200px;
+    flex: 0 1 auto;
     background: #59ff49;
     color: white;
     cursor: pointer;
@@ -204,7 +197,7 @@ button {
     padding: 30px;
     border-radius: 10px;
     position: relative;
-    width: 700px; /* Расширили ширину формы */
+    width: 700px;
     min-width: 700px;
     color: #fff;
 }
@@ -280,15 +273,9 @@ button {
     border-color: #28a745;
 }
 
-/* Убираем кнопку закрытия на самой форме */
-#close-task-modal {
-    display: none;
-}
-
-
 .chart-outer-container {
     width: 80%;
-    margin: 2rem 10%; /* 10% отступы по бокам */
+    margin: 2rem 10%;
 }
 
 .chart-container {

@@ -12,8 +12,10 @@ class HabitBase(BaseModel):
 class HabitCreate(HabitBase):
     pass
 
+
 class HabitUpdate(HabitCreate):
-    pass 
+    pass
+
 
 class HabitUpdatePartial(HabitCreate):
 
@@ -21,6 +23,7 @@ class HabitUpdatePartial(HabitCreate):
     habit_counter: int | None = None
     habit_color: str | None = None
     is_archived: int | None = None
+
 
 class Habit(HabitBase):
     model_config = ConfigDict(from_attributes=True)

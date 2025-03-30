@@ -12,6 +12,7 @@ from .dependencies import task_by_id
 
 crud_router = APIRouter()
 
+
 @crud_router.get("/", response_model=list[Task], tags=["tasks"])
 async def get_tasks(session: AsyncSession = Depends(db_helper.session_dependency)):
     return await crud.get_tasks(session=session)
@@ -30,6 +31,7 @@ async def get_task(
 ):
     return task
 
+
 @crud_router.put("/{task_id}/", tags=["tasks"])
 async def update_task(
     task_update: TaskUpdate,
@@ -43,6 +45,7 @@ async def update_task(
         task_update=task_update,
 
     )
+
 
 @crud_router.patch("/{task_id}/", tags=["tasks"])
 async def update_task_partial(
@@ -58,6 +61,7 @@ async def update_task_partial(
         partial=True
     )
 
+
 @crud_router.delete("/{task_id}/", tags=["tasks"], status_code=status.HTTP_204_NO_CONTENT)
 async def delete_task(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
@@ -65,7 +69,8 @@ async def delete_task(
 
 ) -> None:
     await crud.delete_task(session=session, task_in=task)
-    
+
+
 async def get_task_count(session: AsyncSession):
     result = await session.execute(select(sa.func.count()).select_from(Task))
     count = result.scalar()

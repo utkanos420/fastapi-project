@@ -3,41 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Список заданий</title>
+        <title>Планировщик задач</title>
         <link rel="stylesheet" href="/static/style.css">
         
         <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
         
-        <!-- Основной скрипт -->
-        <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
-
         <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 
     </head>
 <body>
-    <header class="top-bar">
-        <nav>
-            <ul>
-                <li>Главная</li>
-                <li>Статистика</li>
-                <li>Профиль</li>
-            </ul>
-        </nav>
-    </header>
+
     <div class="main-container">
-        <!-- Новые блоки, которые будут над задачами -->
         <div class="top-blocks">
             <div class="top-block">
-                <!-- Место для содержимого первого блока -->
                 <div class="top-block-content">
                     <p style="font-weight: bold; font-size: 30px;"><span id="total-tasks">0</span></p>
                     <p class="last-updated">Последнее обновление: <span id="last-updated">неизвестно</span></p>
                 </div>
             </div>
             <div class="top-block">
-                <!-- Место для содержимого второго блока -->
                 <div class="top-block-content">
                     <p style="font-weight: bold; color: rgb(71, 245, 71); font-size: 30px;"><span id="completed-tasks">0</span> выполнено</p>
                     <p class="remaining-tasks">Осталось выполнить: <span id="remaining-tasks">0</span> задач</p>
@@ -46,32 +32,28 @@
         </div>
 
         <div class="task-container">
-            <!-- Сюда будут добавляться задачи -->
         </div>
         
         <div class="statistics-container">
         </div>
 
-        <!-- Контейнер кнопок внизу -->
         <div class="button-container">
             <button id="add-task" class="task add-task">Добавить задачу</button>
-            <button id="filter-task" class="task filter-task">Фильтровать по</button>
-            <button id="showCompleted">Показать выполненные</button>
+            <button id="showCompleted" class="task add-task">Показать выполненные</button>
         </div>
     </div>
 
-    <!-- Модальные окна для добавления задачи и детальной информации -->
     <div id="task-modal" class="modal hidden">
         <div class="modal-content">
             <p style="font-weight: bold;">Добавление задачи</p>
             <input type="text" id="task-title" placeholder="Название задачи" maxlength="30">
-            <textarea id="task-desc" placeholder="Текст задачи" maxlength="500"></textarea>
+            <textarea id="task-desc" placeholder="Описание задачи" maxlength="500"></textarea>
         
-            <label for="task-date">Выполнить до:</label>
+            <label for="task-date">Срок выполнения:</label>
             <input type="date" id="task-date">
         
             <div class="color-picker">
-                <span>Выберите цвет:</span>
+                <span>Цвет задачи:</span>
                 <input type="color" id="task-color" class="color-input" style="width: 100%;" />
             </div>
         
@@ -86,7 +68,7 @@
             <h3 id="detail-title"></h3>
             <p id="detail-desc"></p>
             <p><strong>Срок сдачи:</strong> <span id="detail-date"></span></p>
-            <button id="delete-task">Удалить</button>
+            <button id="delete-task">Отметить как выполненное</button>
             <button id="close-detail">Закрыть</button>
         </div>
     </div>
@@ -97,6 +79,5 @@
         </div>
     </div>
 
-    <script type="module" src="{{ url_for('static', path='/main.js') }}"></script>
 </body>
 </html>

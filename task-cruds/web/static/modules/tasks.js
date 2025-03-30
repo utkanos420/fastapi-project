@@ -1,6 +1,3 @@
-
-// tasks.js
-
 export function addTask(taskData, color) {
     fetch('/api/v1/tasks/', {
         method: 'POST',
@@ -15,9 +12,8 @@ export function addTask(taskData, color) {
     .catch(error => console.error('Ошибка при добавлении задачи:', error));
 }
 
-// Отображение задачи в UI
 function renderTask(task, color) {
-    if (!showCompleted && task.is_completed === 1) return; // Скрываем выполненные, если флаг отключен
+    if (!showCompleted && task.is_completed === 1) return;
 
     const taskContainer = document.querySelector('.task-container');
     const taskElement = document.createElement('div');
@@ -33,7 +29,6 @@ function renderTask(task, color) {
     taskContainer.appendChild(taskElement);
 }
 
-// Отображение деталей задачи
 export function showTaskDetails(task) {
     document.getElementById('detail-title').textContent = task.task_title;
     document.getElementById('detail-desc').textContent = task.task_description;
@@ -41,22 +36,20 @@ export function showTaskDetails(task) {
     document.getElementById('task-detail-modal').classList.remove('hidden');
 }
 
-let showCompleted = false; // Флаг для отображения выполненных задач
+let showCompleted = false;
 
-// Загрузка всех задач с учетом фильтрации
 export function loadTasks() {
     fetch('/api/v1/tasks')
         .then(response => response.json())
         .then(data => {
             document.querySelector('.task-container').innerHTML = "";
-            data.forEach(task => renderTask(task, "#28A745"));
+            data.forEach(task => renderTask(task, task.task_color || "#28A745"));
         })
         .catch(error => console.error('Ошибка при загрузке задач:', error));
 }
 
-// Переключение отображения выполненных задач
 export function toggleCompletedTasks() {
     showCompleted = !showCompleted;
     document.getElementById('showCompleted').textContent = showCompleted ? "Скрыть выполненные" : "Показать выполненные";
-    loadTasks(); // Перезагрузка списка с учетом флага
+    loadTasks();
 }

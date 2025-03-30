@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-templates_dir = os.path.join(base_dir, "web", "templates") 
+templates_dir = os.path.join(base_dir, "web", "templates")
 static_dir = os.path.join(base_dir, "web", "static")
 
 templates = Jinja2Templates(directory=templates_dir)
@@ -43,6 +43,7 @@ def hello_index():
         "message": "Nice to meet you! Make sure to move to /docs endpoint"
     }
 
+
 @app.get("/lol", response_class=HTMLResponse)
 async def get_tasks(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -50,4 +51,3 @@ async def get_tasks(request: Request):
 
 if __name__ == "__main__":
     uvicorn.run(app=app, port=2223, log_level="debug")
-

@@ -17,7 +17,6 @@ async def task_by_id(
     task = await crud.get_task(session=session, task_id=task_id)
     if task is not None:
         return task
-    
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f'task with id {task_id} is not found'

@@ -1,25 +1,28 @@
-
-// tasks-stats.js
 import { showTaskDetails } from './tasks.js';
 
 export function updateStatistics() {
     fetch('/api/v1/tasks')
         .then(response => response.json())
         .then(data => {
-            const totalTasks = data.length + ' активная задача';
+            const totalTasks = data.length;
+            let taskLabel;
 
-            const archivedTasks = data.filter(task => task.is_archived === 1).length;
-            const averageImportance = data.reduce((sum, task) => sum + task.task_importance, 0) / totalTasks || 0;
-            const countCompletedTasks = (data.filter(task => task.is_completed === 1).length / data.length) * 100 + ' %';
+            if (totalTasks % 10 === 1 && totalTasks % 100 !== 11) {
+                taskLabel = 'активная задача';
+            } else if (totalTasks % 10 >= 2 && totalTasks % 10 <= 4 && (totalTasks % 100 < 10 || totalTasks % 100 >= 20)) {
+                taskLabel = 'активные задачи';
+            } else {
+                taskLabel = 'активных задач';
+            }
 
-            // Обновляем отображение статистики
-            document.getElementById('total-tasks').textContent = totalTasks;
+            const result = `${totalTasks} ${taskLabel}`;
+            const countCompletedTasks = Math.round((data.filter(task => task.is_completed === 1).length / data.length) * 100) + ' %';
+
+            document.getElementById('total-tasks').textContent = result;
             document.getElementById('completed-tasks').textContent = countCompletedTasks;
 
-            // Получаем последнее незавершенное задание
             const lastTask = data.filter(task => task.is_completed !== 1).sort((a, b) => new Date(b.task_created_date) - new Date(a.task_created_date))[0];
             if (lastTask) {
-                // Добавляем блок с последней задачей в статистику
                 displayLastTask(lastTask);
             }
         })
@@ -39,7 +42,6 @@ function displayLastTask(task) {
         </div>
     `;
 
-    // Добавляем обработчик на кнопку перехода к задаче
     const viewButton = statsContainer.querySelector('.view-task-btn');
     viewButton.addEventListener('click', () => {
         showTaskDetails(task);

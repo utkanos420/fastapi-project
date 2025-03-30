@@ -50,22 +50,20 @@ function prepareTimelineData(tasks) {
         .filter(task => task.task_created_until_date)
         .sort((a, b) => new Date(a.task_created_until_date) - new Date(b.task_created_until_date));
     
-    // Определяем диапазон дат
     const dates = validTasks.map(t => new Date(t.task_created_until_date));
     const minDate = new Date(Math.min(...dates));
     const maxDate = new Date(Math.max(...dates));
     minDate.setDate(minDate.getDate() - 2);
     maxDate.setDate(maxDate.getDate() + 2);
     
-    // Формируем данные для графика
     const data = {
         labels: validTasks.map(task => task.task_title),
         datasets: [{
             label: 'Задачи',
             data: validTasks.map(task => ({
                 x: task.task_created_until_date,
-                y: 1, // Все задачи на одном уровне
-                task: task // Сохраняем задачу для tooltip
+                y: 1,
+                task: task
             })),
             backgroundColor: validTasks.map(task => getValidColor(task.task_color)),
             borderColor: validTasks.map(task => chroma(getValidColor(task.task_color)).darken(0.5).hex()),
