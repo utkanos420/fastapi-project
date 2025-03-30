@@ -25,14 +25,20 @@ function renderTask(task, color) {
         ${task.task_created_until_date ? `${task.task_created_until_date}` : 'Без срока'}
     `;
 
-    taskElement.addEventListener('click', () => showTaskDetails(task));
+    taskElement.addEventListener('click', () => {
+        console.log('Task ID:', task.id);  // Выводим id задачи в консоль
+        showTaskDetails(task);
+    });
+
     taskContainer.appendChild(taskElement);
 }
+
 
 export function showTaskDetails(task) {
     document.getElementById('detail-title').textContent = task.task_title;
     document.getElementById('detail-desc').textContent = task.task_description;
     document.getElementById('detail-date').textContent = task.task_created_until_date;
+    document.getElementById('delete-task').dataset.taskId = task.id;
     document.getElementById('task-detail-modal').classList.remove('hidden');
 }
 

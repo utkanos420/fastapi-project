@@ -26,6 +26,29 @@ document.getElementById('task-color').addEventListener('input', function(event) 
     document.getElementById('task-color').style.backgroundColor = selectedColor;
 });
 
+document.getElementById('delete-task').addEventListener('click', () => {
+    const taskId = document.getElementById('delete-task').dataset.taskId;
+    if (!taskId) {
+        console.error('Не найден ID задачи.');
+        return;
+    }
+
+    fetch(`/api/v1/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ is_completed: 1 }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Задача завершена:', data);
+        loadTasks();
+        updateStatistics();
+        document.getElementById('task-detail-modal').classList.add('hidden');
+    })
+    .catch(error => console.error('Ошибка при завершении задачи:', error));
+});
+
+
 document.getElementById('save-task').addEventListener('click', () => {
     const title = document.getElementById('task-title').value;
     const desc = document.getElementById('task-desc').value;
